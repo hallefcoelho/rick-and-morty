@@ -1,0 +1,47 @@
+<div class="home">
+  <div class="home__background-highlight"></div>
+
+  <section class="home__introduction">
+    <div class="home__highlight-container">
+      <div class="home__text-container">
+        <h1 class="home__title" appTypeWriter token="h80"> Rick and Morty</h1>
+
+        <p class="home__text" token="p18">Rick & Morty: Este programa ensina a respeitar o idoso, mesmo que seja um alcoólatra perigoso, que vive em uma realidade paralela e que é seu próprio avô.</p>
+      </div>
+
+      <img class="home__image" src="images/rick-and-morty.png" alt="imagem do rick and morty">
+    </div>
+
+    <span class="fa-solid fa-caret-down fa-bounce fa-2xl home__icon" #arrowDown (click)="scrollToNextSection()"></span>
+  </section>
+
+  <section class="home__episodes" #nextSection>
+    <div class="home__episodes-header">
+      <h2 token="h32">Episodios</h2>
+      <app-dropdown class="home__dropdown"></app-dropdown>
+    </div>
+
+    <div class="home__cards">
+      <app-card alt="imagem do episodio" [urlImage]="'images/6.jpeg'">
+        <h2 token="h20">1. Pilot</h2>
+        <p token="p14">Um cientista sociopata arrasta seu neto inocente para perigosas aventuras interdimensionais.</p>
+      </app-card>
+      <app-card alt="imagem do episodio" [urlImage]="'images/6.jpeg'">
+        <h2 token="h20">1. Pilot</h2>
+        <p token="p14">Um cientista sociopata arrasta seu neto inocente para perigosas aventuras interdimensionais.</p>
+      </app-card>
+      <app-card alt="imagem do episodio" [urlImage]="'images/6.jpeg'">
+        <h2 token="h20">1. Pilot</h2>
+        <p token="p14">Um cientista sociopata arrasta seu neto inocente para perigosas aventuras interdimensionais.</p>
+      </app-card>
+      <app-card alt="imagem do episodio" [urlImage]="'images/6.jpeg'">
+        <h2 token="h20">1. Pilot</h2>
+        <p token="p14">Um cientista sociopata arrasta seu neto inocente para perigosas aventuras interdimensionais.</p>
+      </app-card>
+      <app-card alt="imagem do episodio" [urlImage]="'images/6.jpeg'">
+        <h2 token="h20">1. Pilot</h2>
+        <p token="p14">Um cientista sociopata arrasta seu neto inocente para perigosas aventuras interdimensionais.</p>
+      </app-card>
+    </div>
+  </section>
+</div>

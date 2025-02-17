@@ -1,0 +1,23 @@
+<div class="characters">
+  <div class="characters__header">
+    <div class="characters__search-container">
+      <input type="text" class="characters__search">
+      <i class="fa-solid fa-magnifying-glass fa-lg characters__icon"></i>
+    </div>
+    <app-dropdown class="characters__dropdown"></app-dropdown>
+  </div>
+
+  <!-- @for(character of (characters$ | async); track character.id){
+    <p>{{character}}</p>
+  } -->
+  <div class="characters__card">
+    @for(character of characters(); track character){
+      <app-card alt="Imagem do Personagem" [urlImage]="character.Image" [imageBackground]="true" [status]="character.Status">
+        <h2 token="h20">{{ character.Name }}</h2>
+        <h3 token="p18">Status: {{ character.Status | translateStatus }}</h3>
+        <h3 token="p18">Genero: {{ character.Gender }}</h3>
+      </app-card>
+    }
+  </div>
+
+</div>

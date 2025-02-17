@@ -1,0 +1,15 @@
+<nav class="navbar" [ngClass]="{'navbar--open-menu': showMenu, 'navbar--hidden': !isIconVisible}" #navbarMenu>
+  <img class="navbar__logo" src="images/rick_morty-logo.png" alt="logo rick and morty">
+  <ul class="navbar__list">
+    <li class="navbar__item" routerLinkActive="navbar__active" [routerLinkActiveOptions]="{ exact: true }">
+      <a class="navbar__link" routerLink="/">HOME</a>
+    </li>
+    <li class="navbar__item" routerLinkActive="navbar__active" [routerLinkActiveOptions]="{ exact: true }">
+      <a class="navbar__link" routerLink="/characters">CHARACTERS</a>
+    </li>
+  </ul>
+
+  <button #navbarButton class="navbar__button" (click)="toggleNavbar()">
+    <i class="fa-solid fa-bars fa-2xl navbar__icon"></i>
+  </button>
+</nav>

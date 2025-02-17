@@ -1,0 +1,6 @@
+<div class="card" [ngClass]="{'card--image-background': imageBackground}" [ngStyle]="{'--bg-content-color-text': convertStatusColor(status)}">
+  <img class="card__image" [src]="urlImage" [alt]="alt">
+  <div class="card__content">
+    <ng-content></ng-content>
+  </div>
+</div>

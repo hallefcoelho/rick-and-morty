@@ -1,0 +1,115 @@
+$height-header: 67px;
+
+.home {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+
+  &__background-highlight {
+    width: 100%;
+    height: 100vh;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    background-image: linear-gradient(to right, black, rgba(0, 0, 0, 0.5)), url(../../../../../public/images/universe-rick-and-morty.jpg);
+  }
+
+  &__introduction {
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: calc(#{$height-header} + 16px) 24px 24px 24px;
+  }
+
+  &__highlight-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    @media screen and (max-width: 1000px) {
+      margin-top: calc(#{$height-header} + 16px);
+      flex-direction: column-reverse;
+    }
+  }
+
+  &__text-container {
+    padding-right: 48px;
+
+    @media screen and (max-width: 1000px) {
+      padding-right: 0;
+    }
+  }
+
+  &__title {
+    display: inline;
+    position: relative;
+  }
+
+  &__subtitle {
+    width: 50%;
+    margin-bottom: 8px;
+  }
+
+  &__text {
+    display: block;
+    margin-top: 16px;
+    color: #a0a0a0;
+    text-align: justify;
+  }
+
+  &__image {
+    animation: upDown 5s infinite;
+    max-width: 400px;
+    max-height: 400px;
+    width: 70vw;
+    height: auto;
+    object-fit: contain;
+    transition: all 0.3s ease-in-out;
+
+    @media screen and (max-width: 687px) {
+      max-width: 280px;
+      max-height: 320px;
+    }
+  }
+
+  &__icon {
+    transition: opacity 0.5s ease;
+    padding: 32px 32px 0 32px;
+    cursor: pointer;
+    margin: 0 auto;
+  }
+
+  &__episodes {
+    position: relative;
+    padding: 24px;
+    width: 100%;
+    box-shadow: 0px -25px 20px -20px rgba(0, 0, 0, 0.45);
+  }
+
+  &__episodes-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+
+    @media screen and (max-width: 340px) {
+      justify-content: center;
+      column-gap: 16px;
+    }
+  }
+
+  &__cards {
+    display: grid;
+    gap: 32px 16px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}

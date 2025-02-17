@@ -1,0 +1,71 @@
+[token="h80"] {
+  font-size: 80px;
+  font-weight: 600;
+  line-height: 64px;
+
+  @media screen and (max-width: 1000px) {
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 64px;
+  }
+
+  @media screen and (max-width: 550px) {
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 64px;
+  }
+
+  @media screen and (max-width: 400px) {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+  }
+}
+
+[token="h64"] {
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 64px;
+}
+
+[token="h48"] {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 64px;
+}
+
+[token="h32"] {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+}
+
+[token="h20"] {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+[token="p18"] {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 32px;
+
+  @media screen and (max-width: 400px) {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+}
+
+[token="p16"] {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+[token="p14"] {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+}

@@ -1,0 +1,21 @@
+@use '../../shared/styles/animations';
+
+.typewriter {
+  display: block;
+  z-index: 3;
+  color: white;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: -12px;
+    width: 3px;
+    height: 100%;
+    background-color: white;
+    transition: all 1s;
+    animation: typewriter 0.8s infinite;
+    height: 1em;
+  }
+}

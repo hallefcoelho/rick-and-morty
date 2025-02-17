@@ -1,0 +1,127 @@
+.navbar {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 16px 24px;
+  position: fixed;
+  width: 100%;
+  min-width: none;height: 67px;
+  top: 0;
+  -webkit-transition: top 0.3s;
+  -moz-transition: top 0.3s;
+  -o-transition: top 0.3s;
+  transition: top 0.3s;
+  z-index: 5;
+
+  &--hidden {
+    top: -70px;
+    transition: top 0.3s;
+  }
+
+  &--open-menu {
+    background: rgba(0, 0, 0, 0.7);
+    height: 100%;
+    z-index: 4;
+    overflow: hidden;
+    transition: background 0.3s ease-in-out;
+
+    .navbar {
+      width: 500px;
+
+      &__list {
+        position: fixed;
+        width: 150px;
+        right: 24px;
+        top: 59px;
+        background-color: #317419;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px 0 8px 0;
+        gap: 8px;
+        padding: 8px 0;
+        animation: fade 0.3s ease-in;
+      }
+
+      &__item {
+        border-radius: 0;
+
+        &:hover {
+          background: transparent;
+        }
+
+        &:active {
+          top: 3px;
+          position: relative;
+        }
+      }
+
+      &__active {
+        background: transparent;
+      }
+    }
+  }
+
+  &__logo {
+    height: 50px;
+    position: absolute;
+
+    @media screen and (max-width: 550px) {
+      height: 40px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    list-style: none;
+    width: 100%;
+
+    @media screen and (max-width: 550px) {
+      display: none;
+    }
+  }
+
+  &__item {
+    border-radius: 8px 0 8px 0;
+    transition: background-color 1s ease;
+
+    &:hover {
+      background: #317419;
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 8px 24px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+  &__active {
+    background: #08b1c9;
+
+    .navbar__link {
+      color: white;
+    }
+  }
+
+  &__button {
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: none;
+
+    @media screen and (max-width: 550px) {
+      display: block;
+    }
+  }
+}
