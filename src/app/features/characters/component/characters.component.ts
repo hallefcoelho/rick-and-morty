@@ -36,7 +36,7 @@ export class CharactersComponent implements OnInit, OnDestroy {
   }
 
   getCharacters() {
-    this.charactersService.getCharacters().pipe(
+    this.charactersService.getAll().pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe({
       next: (characters: CustomCharacter[]) => {
