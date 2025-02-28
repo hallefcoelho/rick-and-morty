@@ -37,5 +37,4 @@ export class HomeComponent implements AfterViewInit{
   scrollToNextSection() {
     this.nextSection.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
-
 }

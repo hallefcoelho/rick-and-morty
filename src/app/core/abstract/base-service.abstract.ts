@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { map, Observable } from "rxjs";
 
-export abstract class BaseService<T> {
+export class BaseService<T> {
   protected http = inject(HttpClient);
 
   constructor(private apiUrl: string, private mapper: (data: any) => T[]) {}
@@ -32,5 +32,4 @@ export abstract class BaseService<T> {
       map((response) => this.mapper(response)[0])
     );
   }
-
 }
