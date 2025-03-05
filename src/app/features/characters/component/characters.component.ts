@@ -3,16 +3,16 @@ import { DropdownComponent } from '../../../shared/components/dropdown/dropdown.
 import { CardComponent } from '../../../shared/components/card/card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Subject, takeUntil } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { TranslateStatusPipe } from '../../../core/custom-pipe/translate-status.pipe';
 import { CharacterAbstract } from '../../../core/abstract/character.abstract';
-import { CharacterService } from '../../../core/http-service/characters.service';
+import { CharacterService } from '../../../core/service/characters.service';
 import { CustomCharacter } from '../../../core/interfaces/character.interface';
 
 @Component({
   selector: 'app-characters',
   standalone: true,
-  imports: [DropdownComponent, CardComponent, HttpClientModule, CommonModule, TranslateStatusPipe],
+  imports: [DropdownComponent, CardComponent, HttpClientModule, TranslateStatusPipe, AsyncPipe],
   providers: [
     { provide: CharacterAbstract, useClass: CharacterService }
   ],

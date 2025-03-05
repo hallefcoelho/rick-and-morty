@@ -3,7 +3,7 @@ import { inject } from "@angular/core";
 import { map, Observable } from "rxjs";
 
 export class BaseService<T> {
-  protected http = inject(HttpClient);
+  private http = inject(HttpClient);
 
   constructor(private apiUrl: string, private mapper: (data: any) => T[]) {}
 
