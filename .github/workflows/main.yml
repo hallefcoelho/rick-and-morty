@@ -14,40 +14,72 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🚀 Aviso início
+      - name: 🚀 Pipeline iniciada
         run: |
           curl -H "Content-Type: application/json" \
           -X POST \
-          -d '{"content":"🚀 Build iniciada"}' \
+          -d "{
+            \"content\": \"🚀 Pipeline iniciada\n👤 Autor: ${{ github.actor }}\n🌿 Branch: ${{ github.ref_name }}\"
+          }" \
           ${{ secrets.DISCORD_WEBHOOK }}
 
-      - name: Checkout projeto
+      - name: 📥 Checkout projeto
         uses: actions/checkout@v4
 
-      - name: Configurar Node
+      - name: 📢 Aviso checkout
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d '{"content":"📥 Código baixado com sucesso"}' \
+          ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: ⚙️ Configurar Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      - name: Instalar dependências
-        run: npm ci
+      - name: 📢 Aviso node
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d '{"content":"⚙️ Node configurado"}' \
+          ${{ secrets.DISCORD_WEBHOOK }}
 
-      - name: Build Angular
-        run: npm run build
+      - name: 📦 Instalando dependências
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d '{"content":"📦 Instalando dependências..."}' \
+          ${{ secrets.DISCORD_WEBHOOK }}
 
-      - name: ✅ Sucesso
+          npm ci
+
+      - name: 🏗️ Build Angular
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d '{"content":"🏗️ Executando build Angular..."}' \
+          ${{ secrets.DISCORD_WEBHOOK }}
+
+          npm run build
+
+      - name: ✅ Build sucesso
         if: success()
         run: |
           curl -H "Content-Type: application/json" \
           -X POST \
-          -d '{"content":"✅ Build finalizada com sucesso"}' \
+          -d "{
+            \"content\": \"✅ Build finalizada com sucesso\n📦 Repositório: ${{ github.repository }}\n🌿 Branch: ${{ github.ref_name }}\"
+          }" \
           ${{ secrets.DISCORD_WEBHOOK }}
 
-      - name: ❌ Falha
+      - name: ❌ Capturar erro
         if: failure()
         run: |
           curl -H "Content-Type: application/json" \
           -X POST \
-          -d '{"content":"❌ Build falhou"}' \
+          -d "{
+            \"content\": \"❌ A pipeline falhou!\n📦 Repositório: ${{ github.repository }}\n🌿 Branch: ${{ github.ref_name }}\n🔎 Verifique os logs no GitHub Actions\"
+          }" \
           ${{ secrets.DISCORD_WEBHOOK }}
