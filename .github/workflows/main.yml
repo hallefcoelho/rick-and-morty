@@ -1,4 +1,4 @@
-name: Rick And Morty
+name: Rick And Morty CI
 
 on:
   push:
@@ -10,14 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🚀 Aviso início
-        run: |
-          curl -H "Content-Type: application/json" \
-          -X POST \
-          -d "{
-            \"content\": \"🚀 Pipeline iniciada\n👤 Autor: ${{ github.actor }}\n🌿 Branch: ${{ github.ref_name }}\"
-          }" \
-          ${{ secrets.DISCORD_WEBHOOK }}
+      - name: 🚀 Card pipeline iniciada
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: info
+          title: "🚀 Pipeline Iniciada"
+          description: "Iniciando build da aplicação Angular"
+          color: 0x5865F2
 
       - name: 📥 Checkout projeto
         uses: actions/checkout@v4
@@ -41,7 +41,7 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: success
           title: "✅ Pipeline Finalizada"
-          description: "Build Angular executada com sucesso"
+          description: "Build executada com sucesso"
           color: 0x57F287
 
       - name: ❌ Card falha
@@ -51,5 +51,5 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: failure
           title: "❌ Pipeline Falhou"
-          description: "Erro durante a execução da pipeline"
+          description: "Erro durante execução da pipeline"
           color: 0xED4245
