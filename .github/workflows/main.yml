@@ -5,33 +5,28 @@ on:
     branches:
       - main
 
-  pull_request:
-    branches:
-      - main
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
       - name: 🚀 Pipeline iniciada
-        run: |
-          curl -H "Content-Type: application/json" \
-          -X POST \
-          -d "{
-            \"content\": \"🚀 Pipeline iniciada\n👤 Autor: ${{ github.actor }}\n🌿 Branch: ${{ github.ref_name }}\"
-          }" \
-          ${{ secrets.DISCORD_WEBHOOK }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: info
+          title: "🚀 Pipeline iniciada"
+          description: "Iniciando processo CI/CD"
 
       - name: 📥 Checkout projeto
         uses: actions/checkout@v4
 
-      - name: 📢 Aviso checkout
-        run: |
-          curl -H "Content-Type: application/json" \
-          -X POST \
-          -d '{"content":"📥 Código baixado com sucesso"}' \
-          ${{ secrets.DISCORD_WEBHOOK }}
+      - name: 📢 Checkout concluído
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: info
+          title: "📥 Checkout concluído"
 
       - name: ⚙️ Configurar Node
         uses: actions/setup-node@v4
@@ -39,47 +34,49 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: 📢 Aviso node
-        run: |
-          curl -H "Content-Type: application/json" \
-          -X POST \
-          -d '{"content":"⚙️ Node configurado"}' \
-          ${{ secrets.DISCORD_WEBHOOK }}
+      - name: 📢 Node configurado
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: info
+          title: "⚙️ Node configurado"
 
-      - name: 📦 Instalando dependências
-        run: |
-          curl -H "Content-Type: application/json" \
-          -X POST \
-          -d '{"content":"📦 Instalando dependências..."}' \
-          ${{ secrets.DISCORD_WEBHOOK }}
+      - name: 📦 Instalar dependências
+        run: npm install
 
-          npm ci
+      - name: 📢 Dependências instaladas
+        if: success()
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: info
+          title: "📦 Dependências instaladas"
 
       - name: 🏗️ Build Angular
-        run: |
-          curl -H "Content-Type: application/json" \
-          -X POST \
-          -d '{"content":"🏗️ Executando build Angular..."}' \
-          ${{ secrets.DISCORD_WEBHOOK }}
+        run: npm run build
 
-          npm run build
-
-      - name: ✅ Build sucesso
+      - name: 📢 Build Angular concluído
         if: success()
-        run: |
-          curl -H "Content-Type: application/json" \
-          -X POST \
-          -d "{
-            \"content\": \"✅ Build finalizada com sucesso\n📦 Repositório: ${{ github.repository }}\n🌿 Branch: ${{ github.ref_name }}\"
-          }" \
-          ${{ secrets.DISCORD_WEBHOOK }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: info
+          title: "🏗️ Build Angular concluído"
 
-      - name: ❌ Capturar erro
+      - name: ✅ Pipeline sucesso
+        if: success()
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: success
+          title: "✅ Pipeline finalizada"
+          description: "Build executada com sucesso"
+
+      - name: ❌ Pipeline falhou
         if: failure()
-        run: |
-          curl -H "Content-Type: application/json" \
-          -X POST \
-          -d "{
-            \"content\": \"❌ A pipeline falhou!\n📦 Repositório: ${{ github.repository }}\n🌿 Branch: ${{ github.ref_name }}\n🔎 Verifique os logs no GitHub Actions\"
-          }" \
-          ${{ secrets.DISCORD_WEBHOOK }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: failure
+          title: "❌ Pipeline falhou"
+          description: "Alguma etapa da build apresentou erro"
