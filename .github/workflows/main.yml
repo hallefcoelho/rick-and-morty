@@ -10,30 +10,57 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 🚀 Pipeline iniciada
       - name: 🚀 Card pipeline iniciada
-        uses: sarisia/actions-status-discord@v1
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          status: info
-          title: "🚀 Pipeline Iniciada"
-          description: "Iniciando build da aplicação Angular"
-          color: 0x5865F2
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d '{
+            "embeds": [{
+              "title": "🚀 Pipeline Iniciada",
+              "description": "Iniciando build da aplicação Angular",
+              "color": 3447003,
+              "fields": [
+                {
+                  "name": "👤 Autor",
+                  "value": "${{ github.actor }}",
+                  "inline": true
+                },
+                {
+                  "name": "🌿 Branch",
+                  "value": "${{ github.ref_name }}",
+                  "inline": true
+                },
+                {
+                  "name": "📦 Repositório",
+                  "value": "${{ github.repository }}",
+                  "inline": false
+                }
+              ]
+            }]
+          }' \
+          ${{ secrets.DISCORD_WEBHOOK }}
 
+      # 📥 Checkout
       - name: 📥 Checkout projeto
         uses: actions/checkout@v4
 
+      # ⚙️ Node
       - name: ⚙️ Configurar Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
+      # 📦 Dependências
       - name: 📦 Instalar dependências
         run: npm install
 
+      # 🏗️ Build
       - name: 🏗️ Build Angular
         run: npm run build
 
+      # ✅ Sucesso
       - name: ✅ Card sucesso
         if: success()
         uses: sarisia/actions-status-discord@v1
@@ -41,9 +68,10 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: success
           title: "✅ Pipeline Finalizada"
-          description: "Build executada com sucesso"
+          description: "Build Angular executada com sucesso"
           color: 0x57F287
 
+      # ❌ Falha
       - name: ❌ Card falha
         if: failure()
         uses: sarisia/actions-status-discord@v1
